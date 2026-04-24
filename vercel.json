@@ -2,28 +2,38 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/api/index.py",
-      "use": "@vercel/fastapi"
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "runtime": "python3.11"
+      }
     },
     {
       "src": "frontend/package.json",
-      "use": "@vercel/vite",
+      "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist",
+        "buildCommand": "npm install && npm run build"
       }
     }
   ],
   "routes": [
     {
-      "src": "/backend/(.*)",
-      "dest": "backend/api/index.py"
+      "src": "/api/(.*)",
+      "dest": "api/index.py"
     },
     {
-      "src": "/frontend/(.*)",
+      "src": "/assets/(.*)",
+      "dest": "frontend/dist/assets/$1"
+    },
+    {
+      "src": "/(.*\\.(js|css|ico|png|svg|woff2?))",
       "dest": "frontend/dist/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "frontend/dist/index.html"
     }
-  ],
-  "env": {
-    "PYTHONPATH": "backend"
-  }
+  ]
 }

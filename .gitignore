@@ -5,3 +5,5 @@ dist/
 .env
 *.db
 server.log
+frontend/package-lock.json
+package-lock.json

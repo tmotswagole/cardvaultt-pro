@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -6,12 +7,19 @@ from .models import models
 from .api.endpoints import auth, inventory, issuance, transfers, audit, users, dashboard, health
 from .db.seed import seed_db
 
-models.Base.metadata.create_all(bind=engine)
-db = SessionLocal()
-seed_db(db)
-db.close()
 
-app = FastAPI(title="CardVault Pro API")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    models.Base.metadata.create_all(bind=engine)
+    db = SessionLocal()
+    try:
+        seed_db(db)
+    finally:
+        db.close()
+    yield
+
+
+app = FastAPI(title="CardVault Pro API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

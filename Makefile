@@ -1,4 +1,4 @@
-.PHONY: help install install-backend install-frontend build build-backend build-frontend run run-backend run-frontend test test-backend test-frontend test-e2e clean lint lint-backend lint-frontend
+.PHONY: help install install-backend install-frontend build build-backend build-frontend run run-backend run-frontend seed test test-backend test-frontend test-e2e clean lint lint-backend lint-frontend
 
 PYTHON := python
 NODE := npm
@@ -12,6 +12,7 @@ help:
 	@echo "  run             - Run both backend and frontend (frontend in dev mode)"
 	@echo "  run-backend     - Run FastAPI backend server"
 	@echo "  run-frontend    - Run Vite frontend dev server"
+	@echo "  seed            - Seed the database with initial data"
 	@echo "  test            - Run all tests"
 	@echo "  test-backend    - Run backend tests with pytest"
 	@echo "  test-frontend   - Run frontend tests (if configured)"
@@ -53,6 +54,12 @@ run:
 		--names "backend,frontend" \
 		--prefix-colors "auto" \
 		--kill-others-on-fail
+
+seed:
+	cd backend && $(PYTHON) -c "from app.db.session import SessionLocal; from app.db.seed import seed_db; db = SessionLocal(); seed_db(db); db.close(); print('Database seeded successfully.')"
+
+seed-prod:
+	cd backend && $(PYTHON) scripts/seed.py"
 
 # Test targets
 test: test-backend test-frontend test-e2e

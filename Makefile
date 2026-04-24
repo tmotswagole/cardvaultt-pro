@@ -47,8 +47,12 @@ run-frontend:
 	cd frontend && $(NODE) run dev
 
 run:
-	@echo "Starting backend and frontend..."
-	@echo "Run 'make run-backend' and 'make run-frontend' in separate terminals."
+	npx concurrently \
+		"$(MAKE) run-backend" \
+		"$(MAKE) run-frontend" \
+		--names "backend,frontend" \
+		--prefix-colors "auto" \
+		--kill-others-on-fail
 
 # Test targets
 test: test-backend test-frontend test-e2e

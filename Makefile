@@ -56,6 +56,7 @@ run:
 		--kill-others-on-fail
 
 seed:
+	cd backend && $(PYTHON) scripts/init_db.py
 	cd backend && $(PYTHON) -c "from app.db.session import SessionLocal; from app.db.seed import seed_db; db = SessionLocal(); seed_db(db); db.close(); print('Database seeded successfully.')"
 
 seed-prod:

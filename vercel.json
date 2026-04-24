@@ -2,8 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/index.py",
-      "use": "@vercel/python"
+      "src": "backend/api/index.py",
+      "use": "@vercel/fastapi"
     },
     {
       "src": "frontend/package.json",
@@ -15,8 +15,12 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "api/index.py"
+      "src": "/backend/(.*)",
+      "dest": "backend/api/index.py"
+    },
+    {
+      "src": "/frontend/(.*)",
+      "dest": "frontend/dist/$1"
     }
   ],
   "env": {

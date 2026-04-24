@@ -4,6 +4,13 @@
     {
       "src": "api/index.py",
       "use": "@vercel/python"
+    },
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/vite",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
   "routes": [

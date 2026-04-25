@@ -6,6 +6,7 @@ from .db.session import engine, get_db, SessionLocal
 from .models import models
 from .api.endpoints import auth, inventory, issuance, transfers, audit, users, dashboard, health
 from .db.seed import seed_db
+from .core.config import settings
 
 
 @asynccontextmanager
@@ -23,7 +24,7 @@ app = FastAPI(title="CardVault Pro API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, restrict this
+    allow_origins=[origin.strip() for origin in settings.CORS_ORIGINS.split(",")],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

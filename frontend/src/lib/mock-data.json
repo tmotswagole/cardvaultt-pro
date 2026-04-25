@@ -1,0 +1,557 @@
+{
+  "auth": {
+    "login": {
+      "access_token": "mock-jwt-token-for-demo"
+    },
+    "me": {
+      "id": 1,
+      "employee_id": "ADMIN001",
+      "full_name": "System Administrator",
+      "role": "SYS_ADMIN",
+      "branch_id": "GBR-001"
+    }
+  },
+  "dashboard": {
+    "kpis": [
+      {
+        "name": "Total Cards In Vault",
+        "value": 1342,
+        "delta": 5.2,
+        "trend": [1200, 1250, 1280, 1300, 1320, 1342]
+      },
+      {
+        "name": "Cards Issued Today",
+        "value": 12,
+        "delta": -3.1,
+        "trend": [15, 18, 14, 16, 13, 12]
+      },
+      {
+        "name": "Pending Transfers",
+        "value": 3,
+        "delta": 12.5,
+        "trend": [2, 2, 3, 2, 3, 3]
+      },
+      {
+        "name": "Active Exceptions",
+        "value": 5,
+        "delta": -8.0,
+        "trend": [8, 7, 7, 6, 6, 5]
+      }
+    ],
+    "exceptions": [
+      {
+        "id": 1,
+        "type": "Low Stock Alert",
+        "severity": "RED",
+        "description": "Gaborone Main Branch is low on Mastercard Debit cards (15 remaining)"
+      },
+      {
+        "id": 2,
+        "type": "Expired Batch",
+        "severity": "AMBER",
+        "description": "Francistown has expired prepaid batch BATCH-PR-2026-0009"
+      },
+      {
+        "id": 3,
+        "type": "Transfer Delay",
+        "severity": "AMBER",
+        "description": "Transfer to Kasane has been in transit for 2 days"
+      },
+      {
+        "id": 4,
+        "type": "Unusual Issuance",
+        "severity": "AMBER",
+        "description": "Maun Manager issued card directly instead of teller"
+      },
+      {
+        "id": 5,
+        "type": "Stock Discrepancy",
+        "severity": "RED",
+        "description": "Physical count at Palapye does not match system records"
+      },
+      {
+        "id": 6,
+        "type": "User Access Violation",
+        "severity": "RED",
+        "description": "Suspended user SUSP001 attempted login"
+      }
+    ]
+  },
+  "inventory": [
+    {
+      "id": "BATCH-VD-2026-0042",
+      "card_type": "VISA_DEBIT",
+      "network": "VISA",
+      "branch_id": "GBR-001",
+      "quantity_total": 500,
+      "quantity_available": 312,
+      "quantity_issued": 188,
+      "status": "IN_VAULT",
+      "vendor_batch_ref": "VB-ACC-2026-0112",
+      "expiry_date": "2029-01-01"
+    },
+    {
+      "id": "BATCH-MD-2026-0015",
+      "card_type": "MASTERCARD_DEBIT",
+      "network": "MASTERCARD",
+      "branch_id": "GBR-001",
+      "quantity_total": 300,
+      "quantity_available": 45,
+      "quantity_issued": 255,
+      "status": "IN_VAULT",
+      "vendor_batch_ref": "VB-ACC-2026-0115",
+      "expiry_date": "2029-01-01"
+    },
+    {
+      "id": "BATCH-PR-2026-0009",
+      "card_type": "PREPAID",
+      "network": "VISA",
+      "branch_id": "FTW-001",
+      "quantity_total": 200,
+      "quantity_available": 5,
+      "quantity_issued": 195,
+      "status": "EXPIRED",
+      "vendor_batch_ref": "VB-ACC-2026-0109",
+      "expiry_date": "2026-01-01"
+    },
+    {
+      "id": "BATCH-VD-2026-0055",
+      "card_type": "VISA_DEBIT",
+      "network": "VISA",
+      "branch_id": "FTW-001",
+      "quantity_total": 150,
+      "quantity_available": 120,
+      "quantity_issued": 30,
+      "status": "IN_VAULT",
+      "vendor_batch_ref": "VB-ACC-2026-0134",
+      "expiry_date": "2029-06-01"
+    },
+    {
+      "id": "BATCH-MD-2026-0022",
+      "card_type": "MASTERCARD_DEBIT",
+      "network": "MASTERCARD",
+      "branch_id": "MAU-001",
+      "quantity_total": 100,
+      "quantity_available": 88,
+      "quantity_issued": 12,
+      "status": "IN_VAULT",
+      "vendor_batch_ref": "VB-ACC-2026-0140",
+      "expiry_date": "2029-03-01"
+    },
+    {
+      "id": "BATCH-PR-2026-0033",
+      "card_type": "PREPAID",
+      "network": "VISA",
+      "branch_id": "KAS-001",
+      "quantity_total": 80,
+      "quantity_available": 72,
+      "quantity_issued": 8,
+      "status": "IN_VAULT",
+      "vendor_batch_ref": "VB-ACC-2026-0148",
+      "expiry_date": "2029-04-01"
+    },
+    {
+      "id": "BATCH-VD-2026-0066",
+      "card_type": "VISA_DEBIT",
+      "network": "VISA",
+      "branch_id": "GBR-001",
+      "quantity_total": 1000,
+      "quantity_available": 1000,
+      "quantity_issued": 0,
+      "status": "IN_VAULT",
+      "vendor_batch_ref": "VB-ACC-2026-0155",
+      "expiry_date": "2029-12-01"
+    }
+  ],
+  "transfers": [
+    {
+      "id": 1,
+      "from_branch_id": "GBR-001",
+      "to_branch_id": "FTW-001",
+      "card_type": "VISA_DEBIT",
+      "quantity": 50,
+      "created_at": "2026-04-20T10:00:00Z",
+      "status": "DELIVERED",
+      "reason": "Routine restock for Francistown",
+      "requested_by": "MANAGER002",
+      "approved_by": "OPS001"
+    },
+    {
+      "id": 2,
+      "from_branch_id": "GBR-001",
+      "to_branch_id": "MAU-001",
+      "card_type": "MASTERCARD_DEBIT",
+      "quantity": 30,
+      "created_at": "2026-04-18T09:30:00Z",
+      "status": "DELIVERED",
+      "reason": "Monthly allocation to Maun",
+      "requested_by": "MANAGER003",
+      "approved_by": "OPS001"
+    },
+    {
+      "id": 3,
+      "from_branch_id": "GBR-001",
+      "to_branch_id": "KAS-001",
+      "card_type": "PREPAID",
+      "quantity": 25,
+      "created_at": "2026-04-22T14:15:00Z",
+      "status": "IN_TRANSIT",
+      "reason": "Emergency tourist season restock",
+      "requested_by": "MANAGER001",
+      "approved_by": "OPS002"
+    },
+    {
+      "id": 4,
+      "from_branch_id": "FTW-001",
+      "to_branch_id": "SER-001",
+      "card_type": "VISA_DEBIT",
+      "quantity": 40,
+      "created_at": "2026-04-23T11:00:00Z",
+      "status": "PENDING_APPROVAL",
+      "reason": "New branch opening allocation",
+      "requested_by": "MANAGER002",
+      "approved_by": null
+    },
+    {
+      "id": 5,
+      "from_branch_id": "GBR-001",
+      "to_branch_id": "PAL-001",
+      "card_type": "VISA_DEBIT",
+      "quantity": 20,
+      "created_at": "2026-04-21T16:45:00Z",
+      "status": "REJECTED",
+      "reason": "Weekend rush stock request (Insufficient stock)",
+      "requested_by": "MANAGER001",
+      "approved_by": "OPS001"
+    },
+    {
+      "id": 6,
+      "from_branch_id": "MAU-001",
+      "to_branch_id": "KAS-001",
+      "card_type": "MASTERCARD_DEBIT",
+      "quantity": 10,
+      "created_at": "2026-04-19T08:20:00Z",
+      "status": "CANCELLED",
+      "reason": "Incorrect quantity ordered",
+      "requested_by": "MANAGER003",
+      "approved_by": "OPS002"
+    }
+  ],
+  "audit": [
+    {
+      "id": 1,
+      "timestamp": "2026-04-24T08:30:00Z",
+      "event_type": "USER_LOGIN",
+      "user_id": "ADMIN001",
+      "branch_id": "GBR-001",
+      "description": "System Administrator logged in",
+      "severity": "INFO",
+      "ip_address": "127.0.0.1"
+    },
+    {
+      "id": 2,
+      "timestamp": "2026-04-24T09:15:00Z",
+      "event_type": "USER_LOGIN",
+      "user_id": "TELLER001",
+      "branch_id": "GBR-001",
+      "description": "Gaborone Teller logged in",
+      "severity": "INFO",
+      "ip_address": "192.168.1.45"
+    },
+    {
+      "id": 3,
+      "timestamp": "2026-04-24T09:45:00Z",
+      "event_type": "CARD_ISSUED",
+      "user_id": "TELLER001",
+      "branch_id": "GBR-001",
+      "description": "Issued Visa Debit card to Olebile Makolo",
+      "severity": "INFO",
+      "ip_address": "192.168.1.45"
+    },
+    {
+      "id": 4,
+      "timestamp": "2026-04-24T10:00:00Z",
+      "event_type": "TRANSFER_APPROVED",
+      "user_id": "OPS001",
+      "branch_id": "GBR-001",
+      "description": "Approved transfer of 50 VISA_DEBIT to FTW-001",
+      "severity": "INFO",
+      "ip_address": "192.168.1.10"
+    },
+    {
+      "id": 5,
+      "timestamp": "2026-04-24T10:30:00Z",
+      "event_type": "TRANSFER_REJECTED",
+      "user_id": "OPS001",
+      "branch_id": "GBR-001",
+      "description": "Rejected transfer of 20 VISA_DEBIT to PAL-001",
+      "severity": "WARNING",
+      "ip_address": "192.168.1.10"
+    },
+    {
+      "id": 6,
+      "timestamp": "2026-04-24T11:00:00Z",
+      "event_type": "USER_SUSPENDED",
+      "user_id": "ADMIN001",
+      "branch_id": "GBR-001",
+      "description": "Suspended user SUSP001 - Former Teller",
+      "severity": "CRITICAL",
+      "ip_address": "127.0.0.1"
+    },
+    {
+      "id": 7,
+      "timestamp": "2026-04-24T11:30:00Z",
+      "event_type": "STOCK_CHECK",
+      "user_id": "AUDIT001",
+      "branch_id": "GBR-001",
+      "description": "Auditor performed monthly stock verification",
+      "severity": "INFO",
+      "ip_address": "192.168.1.99"
+    },
+    {
+      "id": 8,
+      "timestamp": "2026-04-24T12:00:00Z",
+      "event_type": "BATCH_RECEIVED",
+      "user_id": "OPS001",
+      "branch_id": "GBR-001",
+      "description": "Received new batch BATCH-VD-2026-0066",
+      "severity": "INFO",
+      "ip_address": "192.168.1.10"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "employee_id": "ADMIN001",
+      "full_name": "System Administrator",
+      "role": "SYS_ADMIN",
+      "branch_id": "GBR-001",
+      "last_login": "2026-04-24T08:30:00Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 2,
+      "employee_id": "AUDIT001",
+      "full_name": "Head Auditor",
+      "role": "AUDITOR",
+      "branch_id": "GBR-001",
+      "last_login": "2026-04-24T11:30:00Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 3,
+      "employee_id": "TELLER001",
+      "full_name": "Gaborone Teller",
+      "role": "TELLER",
+      "branch_id": "GBR-001",
+      "last_login": "2026-04-24T09:15:00Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 4,
+      "employee_id": "TELLER002",
+      "full_name": "Francistown Teller",
+      "role": "TELLER",
+      "branch_id": "FTW-001",
+      "last_login": "2026-04-24T10:00:00Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 5,
+      "employee_id": "TELLER003",
+      "full_name": "Maun Teller",
+      "role": "TELLER",
+      "branch_id": "MAU-001",
+      "last_login": "2026-04-24T09:00:00Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 6,
+      "employee_id": "MANAGER001",
+      "full_name": "Gaborone Manager",
+      "role": "BR_MANAGER",
+      "branch_id": "GBR-001",
+      "last_login": "2026-04-24T08:00:00Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 7,
+      "employee_id": "MANAGER002",
+      "full_name": "Francistown Manager",
+      "role": "BR_MANAGER",
+      "branch_id": "FTW-001",
+      "last_login": "2026-04-24T10:30:00Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 8,
+      "employee_id": "MANAGER003",
+      "full_name": "Maun Manager",
+      "role": "BR_MANAGER",
+      "branch_id": "MAU-001",
+      "last_login": "2026-04-24T09:30:00Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 9,
+      "employee_id": "OPS001",
+      "full_name": "Card Ops Officer",
+      "role": "CARD_OPS",
+      "branch_id": "GBR-001",
+      "last_login": "2026-04-24T10:00:00Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 10,
+      "employee_id": "OPS002",
+      "full_name": "Regional Card Ops",
+      "role": "CARD_OPS",
+      "branch_id": "FTW-001",
+      "last_login": "2026-04-24T11:00:00Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 11,
+      "employee_id": "SUSP001",
+      "full_name": "Former Teller",
+      "role": "TELLER",
+      "branch_id": "GBR-001",
+      "last_login": null,
+      "status": "SUSPENDED"
+    }
+  ],
+  "health": [
+    {
+      "name": "PostgreSQL Primary",
+      "status": "healthy",
+      "latency": 12.5
+    },
+    {
+      "name": "FastAPI Application",
+      "status": "healthy",
+      "latency": 8.3
+    },
+    {
+      "name": "Redis Cache",
+      "status": "healthy",
+      "latency": 3.1
+    },
+    {
+      "name": "Flexcube CMS Integration",
+      "status": "healthy",
+      "latency": 145.2
+    },
+    {
+      "name": "LDAP/Active Directory",
+      "status": "healthy",
+      "latency": 22.7
+    },
+    {
+      "name": "Email Gateway",
+      "status": "healthy",
+      "latency": 67.4
+    },
+    {
+      "name": "Audit Log Stream",
+      "status": "healthy",
+      "latency": 5.8
+    },
+    {
+      "name": "Backup System",
+      "status": "healthy",
+      "latency": 34.1
+    }
+  ],
+  "issuance": {
+    "customers": {
+      "OM123456": {
+        "full_name": "Olebile Makolo",
+        "account_number": "1001234567",
+        "id_number": "OM123456",
+        "status": "ACTIVE",
+        "account_type": "Savings",
+        "branch": "GBR-001"
+      },
+      "KM234567": {
+        "full_name": "Keletso Mpho",
+        "account_number": "1001234568",
+        "id_number": "KM234567",
+        "status": "ACTIVE",
+        "account_type": "Current",
+        "branch": "GBR-001"
+      },
+      "TM345678": {
+        "full_name": "Thabo Modise",
+        "account_number": "1001234569",
+        "id_number": "TM345678",
+        "status": "ACTIVE",
+        "account_type": "Savings",
+        "branch": "GBR-001"
+      },
+      "AG456789": {
+        "full_name": "Amantle Gaborekwe",
+        "account_number": "1001234570",
+        "id_number": "AG456789",
+        "status": "ACTIVE",
+        "account_type": "Current",
+        "branch": "FTW-001"
+      },
+      "OK567890": {
+        "full_name": "Onalenna Kgosi",
+        "account_number": "1001234571",
+        "id_number": "OK567890",
+        "status": "ACTIVE",
+        "account_type": "Savings",
+        "branch": "FTW-001"
+      },
+      "NR678901": {
+        "full_name": "Neo Ramotlhwana",
+        "account_number": "1001234572",
+        "id_number": "NR678901",
+        "status": "ACTIVE",
+        "account_type": "Savings",
+        "branch": "MAU-001"
+      },
+      "MT789012": {
+        "full_name": "Masego Tlhapi",
+        "account_number": "1001234573",
+        "id_number": "MT789012",
+        "status": "ACTIVE",
+        "account_type": "Current",
+        "branch": "KAS-001"
+      }
+    }
+  },
+  "branches": [
+    {
+      "id": "GBR-001",
+      "name": "Gaborone Main Branch",
+      "code": "GMB001"
+    },
+    {
+      "id": "FTW-001",
+      "name": "Francistown Branch",
+      "code": "FTB001"
+    },
+    {
+      "id": "MAU-001",
+      "name": "Maun Branch",
+      "code": "MAB001"
+    },
+    {
+      "id": "KAS-001",
+      "name": "Kasane Branch",
+      "code": "KAB001"
+    },
+    {
+      "id": "SER-001",
+      "name": "Serowe Branch",
+      "code": "SRB001"
+    },
+    {
+      "id": "PAL-001",
+      "name": "Palapye Branch",
+      "code": "PLB001"
+    }
+  ]
+}

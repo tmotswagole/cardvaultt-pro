@@ -20,19 +20,11 @@
   ],
   "rewrites": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/:path*",
       "destination": "/api/index.py"
     },
     {
-      "source": "/assets/(.*)",
-      "destination": "/frontend/dist/assets/$1"
-    },
-    {
-      "source": "/(.*\\.(js|css|ico|png|svg|woff2?))",
-      "destination": "/frontend/dist/$1"
-    },
-    {
-      "source": "/(.*)",
+      "source": "/:path*",
       "destination": "/frontend/dist/index.html"
     }
   ]

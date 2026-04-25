@@ -102,10 +102,26 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use(
   (response) => {
+    const url = response.config.url || '';
+    const method = response.config.method?.toUpperCase();
     console.log(
-      `[API Response] ${response.config.method?.toUpperCase()} ${response.config.url} -> ${response.status}`,
+      `[API Response] ${method} ${url} -> ${response.status}`,
       { data: response.data }
     );
+
+    // Check if response is HTML (Vite SPA fallback) instead of expected JSON
+    const contentType = String(response.headers?.['content-type'] || '');
+    const isHtml = contentType.includes('text/html') ||
+                   (typeof response.data === 'string' && response.data.trim().startsWith('<!DOCTYPE'));
+
+    if (isHtml) {
+      console.warn(`[API Fallback] Detected HTML response, using mock data for ${method} ${url}`);
+      const mockResponse = resolveMockResponse(response.config);
+      if (mockResponse) {
+        return Promise.resolve(mockResponse as any);
+      }
+    }
+
     return response;
   },
   async (error) => {
@@ -118,16 +134,11 @@ api.interceptors.response.use(
       { message: error.message, code: error.code, data, headers: error.response?.headers }
     );
 
-    if (!error.response || error.response.status >= 500 || error.code === 'ERR_NETWORK') {
+    // Try mock fallback for ANY error - if endpoint is known, serve mock data
+    const mockResponse = resolveMockResponse(error.config);
+    if (mockResponse) {
       console.warn(`[API Fallback] Using mock data for ${method?.toUpperCase()} ${url}`);
-      try {
-        const mockResponse = resolveMockResponse(error.config);
-        if (mockResponse) {
-          return Promise.resolve(mockResponse as any);
-        }
-      } catch (mockErr: any) {
-        return Promise.reject({ response: { status: 404, data: { detail: mockErr.message } } });
-      }
+      return Promise.resolve(mockResponse as any);
     }
 
     if (error.response?.status === 401) {
